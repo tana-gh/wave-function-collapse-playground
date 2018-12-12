@@ -2,6 +2,6 @@ import './sass/style.sass'
 
 import * as React    from 'react'
 import * as ReactDOM from 'react-dom'
-import PixiApp       from './components/PixiApp'
+import Main          from './components/Main'
 
-ReactDOM.render(<PixiApp id="main-canvas" width={ 100 } height={ 100 }/>, document.getElementById('root'))
+ReactDOM.render(<Main/>, document.getElementById('root'))
