@@ -1,17 +1,7 @@
-import * as React    from 'react'
-import * as ReactDOM from 'react-dom'
-import * as PIXI     from 'pixi.js'
 import './sass/style.sass'
 
-const app  = new PIXI.Application(window.innerWidth - 30, window.innerHeight - 30)
+import * as React    from 'react'
+import * as ReactDOM from 'react-dom'
+import PixiApp       from './components/PixiApp'
 
-class App extends React.Component {
-    componentDidMount() {
-        document.getElementById('canvas').appendChild(app.view)
-    }
-    render() {
-        return <div id="canvas"></div>
-    }
-}
-
-ReactDOM.render(<App/>, document.getElementById('root'))
+ReactDOM.render(<PixiApp id="main-canvas" width={ 100 } height={ 100 }/>, document.getElementById('root'))
