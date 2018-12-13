@@ -1,6 +1,6 @@
 import * as  React from 'react'
-import PixiApp     from './PixiApp'
-import ColorPicker from './ColorPicker'
+import PixiApp     from '../components/PixiApp'
+import ColorPicker from '../components/ColorPicker'
 
 const Main = () =>
     <div>

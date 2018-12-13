@@ -2,6 +2,11 @@ import './sass/style.sass'
 
 import * as React    from 'react'
 import * as ReactDOM from 'react-dom'
-import Main          from './components/Main'
+import Provider      from './store/Provider'
+import Router        from './router/Router'
 
-ReactDOM.render(<Main/>, document.getElementById('root'))
+ReactDOM.render(
+    <Provider>
+        <Router/>
+    </Provider>
+    , document.getElementById('root'))
