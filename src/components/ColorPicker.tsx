@@ -1,5 +1,4 @@
 import * as  React      from 'react'
-import { connect }      from 'react-redux'
 import { CirclePicker } from 'react-color'
 
 const colors = [
@@ -19,22 +18,14 @@ const colors = [
     '#FFC107',
     '#FF9800',
     '#FF5722',
-    '#000000',
-    '#EEEEEE'
+    '#EEEEEE',
+    '#000000'
 ]
 
 const ColorPicker = props =>
-    <CirclePicker colors={ colors } onChangeComplete={ color => props.handleChangeComplete(color) }/>
+    <CirclePicker
+        colors={ colors }
+        color={ props.color }
+        onChangeComplete={ color => props.handleChangePenColor(color) }/>
 
-const mapStateToProps = state => state
-
-const mapDispatchToProps = dispatch => ({
-    handleChangeComplete(color) {
-        dispatch({
-            type: 'PEN_COLOR',
-            color
-        })
-    }
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ColorPicker)
+export default ColorPicker
