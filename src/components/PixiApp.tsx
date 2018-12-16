@@ -1,6 +1,8 @@
 import * as React from 'react'
 import * as PIXI  from 'pixi.js'
 
+import * as App from '../models/app'
+
 interface Props {
     id    : string
     width : number
@@ -14,7 +16,7 @@ export default class PixiApp extends React.Component<Props> {
     constructor(props: Props) {
         super(props)
         this.id  = props.id
-        this.app = new PIXI.Application(props.width, props.height)
+        this.app = App.createApp(props.width, props.height)
     }
 
     componentDidMount() {
@@ -22,12 +24,7 @@ export default class PixiApp extends React.Component<Props> {
     }
 
     componentWillReceiveProps(nextProps) {
-        const element = document.getElementById(this.id)
-        element.removeChild(this.app.view)
-        this.app.destroy(false, true)
-        
-        this.app = new PIXI.Application(nextProps.width, nextProps.height)
-        element.appendChild(this.app.view)
+        this.app.renderer.resize(nextProps.width, nextProps.height)
     }
 
     render() {

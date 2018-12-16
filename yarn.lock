@@ -725,6 +725,11 @@
     csstype "^2.0.0"
     indefinite-observable "^1.0.1"
 
+"@types/lodash@^4.14.119":
+  version "4.14.119"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.119.tgz#be847e5f4bc3e35e46d041c394ead8b603ad8b39"
+  integrity sha512-Z3TNyBL8Vd/M9D9Ms2S3LmFq2sSMzahodD6rCS9V2N44HUMINb75jNkSuwAx7eo2ufqTdfOdtGQpNbieUjPQmw==
+
 "@types/pixi.js@^4.8.4":
   version "4.8.4"
   resolved "https://registry.yarnpkg.com/@types/pixi.js/-/pixi.js-4.8.4.tgz#5111491292571aeaeacfc79edf92476e20fd7898"
@@ -734,10 +739,6 @@
   version "15.5.7"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.7.tgz#c6f1e0d0109ff358b132d98b7b4025c7a7b707c5"
   integrity sha512-a6WH0fXkgPNiGIuLjjdpf0n/GnmgWZ4vLuVIJJnDwhmRDPEaiRBcy5ofQPh+EJFua0S1QWmk1745+JqZQGnJ8Q==
-
-"@types/ramda@types/npm-ramda#dist":
-  version "0.25.0"
-  resolved "https://codeload.github.com/types/npm-ramda/tar.gz/9529aa3c8ff70ff84afcbc0be83443c00f30ea90"
 
 "@types/react-dom@^16.0.11":
   version "16.0.11"
@@ -4886,11 +4887,6 @@ querystringify@^2.0.0:
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.0.tgz#7ded8dfbf7879dcc60d0a644ac6754b283ad17ef"
   integrity sha512-sluvZZ1YiTLD5jsqZcDmFyV2EwToyXZBfpoVOmktMmW+VEnhgakFHnasVph65fOjGPTWN0Nw3+XQaSeMayr0kg==
 
-ramda@^0.26.1:
-  version "0.26.1"
-  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.26.1.tgz#8d41351eb8111c55353617fc3bbffad8e4d35d06"
-  integrity sha512-hLWjpy7EnsDBb0p+Z3B7rPi3GDeRG5ZtiI33kJhTt+ORCd38AbAIjB/9zRIUoeTbE/AVX5ZkU7m6bznsvrf8eQ==
-
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/randombytes/-/randombytes-2.0.6.tgz#d302c522948588848a8d300c932b44c24231da80"
@@ -5195,9 +5191,9 @@ relateurl@0.2.x:
   integrity sha1-VNvzd+UUQKypCkzSdGANP/LYiKk=
 
 remove-array-items@^1.0.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/remove-array-items/-/remove-array-items-1.1.0.tgz#e3d4aaba795a412479ea89408dee345387da7d3b"
-  integrity sha512-+YAHWd5patqAM/F4uBsto9h8RXDVxPRrKW46AkbI6eH12OFrN9wlGpkNWYxCjCfwtkidTjaaCXqU634V4mysvw==
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/remove-array-items/-/remove-array-items-1.1.1.tgz#fd745ff73d0822e561ea910bf1b401fc7843e693"
+  integrity sha512-MXW/jtHyl5F1PZI7NbpS8SOtympdLuF20aoWJT5lELR1p/HJDd5nqW8Eu9uLh/hCRY3FgvrIT5AwDCgBODklcA==
 
 remove-trailing-separator@^1.0.1:
   version "1.1.0"
@@ -5303,9 +5299,9 @@ resolve@^1.3.2, resolve@^1.8.1:
     path-parse "^1.0.5"
 
 resource-loader@^2.1.1:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/resource-loader/-/resource-loader-2.2.0.tgz#1569f62bafb3638e8676d192ea1daf262ba65611"
-  integrity sha512-DfFhj7jveciV2fGu0gzJiev9i8mpIIjGiASBpPyUbQCPfNp7rnGF9mPMeJxPWnxNF4N9+NBkTIE1823/AnQy8g==
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/resource-loader/-/resource-loader-2.2.2.tgz#84ff961a0257da3f75e6f7b7f3577bfdc24e6717"
+  integrity sha512-90EwE9bceYxCWQ0i4YZo+XqTVWMyoLK5seC0bRVWr0eFIYKk9qu5XnQ4QpakWDCNpIsoKJeeFObp/PgodTurew==
   dependencies:
     mini-signals "^1.1.1"
     parse-uri "^1.0.0"

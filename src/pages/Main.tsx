@@ -26,11 +26,11 @@ class Main extends React.Component<any, any> {
                     handleChangePenColor={ color => this.props.handleChangePenColor(color) }/>
                 <TextField
                     label="Width"  type="number" value={ this.state.width }
-                    onChange={ event => this.setState({ width: parseInt(event.target.value) }) }
+                    onChange={ e => this.setState({ width: parseInt(e.target.value) }) }
                     onBlur={ () => { this.props.handleChangeCanvasSize(this.state.width, this.state.height) } }/>
                 <TextField
                     label="Height" type="number" value={ this.state.height }
-                    onChange={ event => this.setState({ height: parseInt(event.target.value) }) }
+                    onChange={ e => this.setState({ height: parseInt(e.target.value) }) }
                     onBlur={ () => { this.props.handleChangeCanvasSize(this.state.width, this.state.height) } }/>
                 <PixiApp
                     ref={ ref => this.inputCanvas = ref }
