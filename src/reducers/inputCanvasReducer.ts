@@ -2,7 +2,7 @@ import * as A      from './actions'
 import * as C      from '../const'
 import ColorHelper from 'react-color/lib/helpers/color'
 
-export interface inputCanvasState {
+export interface InputCanvasState {
     id      : string
     width   : number
     height  : number
@@ -17,7 +17,7 @@ const initialState = {
 }
 
 export const inputCanvasReducer = (
-    state: inputCanvasState = initialState,
+    state: InputCanvasState = initialState,
     action: A.CanvasSize | A.PenColor
 ) => {
     if (!('id' in action) || action.id != C.inputCanvasId) return state

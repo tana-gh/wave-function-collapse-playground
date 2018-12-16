@@ -8,17 +8,26 @@ interface Props {
 }
 
 export default class PixiApp extends React.Component<Props> {
+    private readonly id : string
     private app: PIXI.Application
-    private id : string
 
     constructor(props: Props) {
         super(props)
-        this.app = new PIXI.Application(props.width, props.height)
         this.id  = props.id
+        this.app = new PIXI.Application(props.width, props.height)
     }
 
     componentDidMount() {
         document.getElementById(this.id).appendChild(this.app.view)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const element = document.getElementById(this.id)
+        element.removeChild(this.app.view)
+        this.app.destroy(false, true)
+        
+        this.app = new PIXI.Application(nextProps.width, nextProps.height)
+        element.appendChild(this.app.view)
     }
 
     render() {
