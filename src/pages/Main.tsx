@@ -22,7 +22,7 @@ class Main extends React.Component<any, any> {
         return (
             <div>
                 <ColorPicker
-                    color={ this.props.penColor.hex }
+                    color={ this.props.penColor.rgb }
                     handleChangePenColor={ color => this.props.handleChangePenColor(color) }/>
                 <TextField
                     label="Width"  type="number" value={ this.state.width }

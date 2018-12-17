@@ -6317,11 +6317,6 @@ watchpack@^1.5.0:
     graceful-fs "^4.1.2"
     neo-async "^2.5.0"
 
-wavefunctioncollapse@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/wavefunctioncollapse/-/wavefunctioncollapse-1.0.0.tgz#60066e013adce4d3774196ed9bfcd3809847092a"
-  integrity sha1-YAZuATrc5NN3QZbtm/zTgJhHCSo=
-
 wbuf@^1.1.0, wbuf@^1.7.2:
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/wbuf/-/wbuf-1.7.3.tgz#c1d8d149316d3ea852848895cb6a0bfe887b87df"

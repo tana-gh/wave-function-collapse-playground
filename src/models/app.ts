@@ -4,7 +4,7 @@ import { store } from '../store/Provider'
 import _ = require('lodash')
 
 export const createApp = (width, height) => {
-    const app = new PIXI.Application({ width, height, forceCanvas: true })
+    const app = new PIXI.Application({ width, height })
     initApp(app)
     return app
 }
@@ -12,11 +12,11 @@ export const createApp = (width, height) => {
 const initApp = (app: PIXI.Application) => {
     app.renderer.autoResize = true
 
-    const g = new PIXI.Graphics()
-    app.stage.addChild(g)
-
     const interaction: PIXI.interaction.InteractionManager = app.renderer.plugins.interaction
     interaction.cursorStyles = { default: 'crosshair', pointer: 'default' }
+
+    const g = new PIXI.Graphics()
+    app.stage.addChild(g)
 
     let isMouseDown    = false
     let [prevX, prevY] = [0, 0]
