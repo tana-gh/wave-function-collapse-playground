@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as THREE from 'three'
 import * as webgl from '../models/webgl'
 
 interface Props {
@@ -9,8 +10,8 @@ interface Props {
 
 export default class WebGL extends React.Component<Props> {
     private readonly id: string
-    private isWebGL: boolean
-    private canvas : HTMLElement
+    private isWebGL : boolean
+    private renderer: THREE.Renderer
 
     constructor(props: Props) {
         super(props)
@@ -18,13 +19,13 @@ export default class WebGL extends React.Component<Props> {
     }
 
     componentDidMount() {
-        [this.isWebGL, this.canvas] = webgl.createWebGL(document.getElementById(this.id), this.props.width, this.props.height)
+        [ this.isWebGL, this.renderer ] = webgl.createWebGL(document.getElementById(this.id), this.props.width, this.props.height)
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.isWebGL)
         {
-            webgl.resize(this.canvas, nextProps.width, nextProps.height)
+            webgl.resize(this.renderer, nextProps.width, nextProps.height)
         }
     }
 
