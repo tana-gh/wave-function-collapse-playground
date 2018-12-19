@@ -47,6 +47,10 @@ module.exports = env => {
                     ]
                 },
                 {
+                    test: /\.(txt|glsl)$/,
+                    loader: 'raw-loader'
+                },
+                {
                     test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                     loader: 'url-loader',
                     options: {

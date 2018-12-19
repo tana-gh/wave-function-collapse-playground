@@ -1,4 +1,4 @@
 import { combineReducers }    from 'redux'
-import { inputCanvasReducer } from './inputCanvasReducer'
+import { mainCanvasReducer } from './mainCanvasReducer'
 
-export default combineReducers({ inputCanvasReducer })
+export default combineReducers({ mainCanvasReducer })

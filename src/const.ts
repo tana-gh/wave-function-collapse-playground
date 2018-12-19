@@ -1,2 +1,2 @@
 
-export const inputCanvasId = 'input-canvas'
+export const mainCanvasId = 'main-canvas'

@@ -2,14 +2,12 @@ import * as  React from 'react'
 import { connect } from 'react-redux'
 import TextField   from '@material-ui/core/TextField'
 import ColorPicker from '../components/ColorPicker'
-import PixiApp     from '../components/PixiApp'
+import WebGL       from '../components/WebGL'
 
 import * as A from '../reducers/actions'
 import * as C from '../const'
 
 class Main extends React.Component<any, any> {
-    private inputCanvas: PixiApp
-
     constructor(props) {
         super(props)
         this.state = {
@@ -32,24 +30,23 @@ class Main extends React.Component<any, any> {
                     label="Height" type="number" value={ this.state.height }
                     onChange={ e => this.setState({ height: parseInt(e.target.value) }) }
                     onBlur={ () => { this.props.handleChangeCanvasSize(this.state.width, this.state.height) } }/>
-                <PixiApp
-                    ref={ ref => this.inputCanvas = ref }
-                    id={ C.inputCanvasId } width={ this.props.width } height={ this.props.height }/>
+                <WebGL
+                    id={ C.mainCanvasId } width={ this.props.width } height={ this.props.height }/>
             </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    ...state.inputCanvasReducer
+    ...state.mainCanvasReducer
 })
 
 const mapDispatchToProps = dispatch => ({
     handleChangePenColor(color) {
-        dispatch(A.penColor(C.inputCanvasId, color))
+        dispatch(A.penColor(C.mainCanvasId, color))
     },
     handleChangeCanvasSize(width, height) {
-        dispatch(A.canvasSize(C.inputCanvasId, width, height))
+        dispatch(A.canvasSize(C.mainCanvasId, width, height))
     }
 })
 
