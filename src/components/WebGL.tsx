@@ -1,6 +1,5 @@
-import * as React from 'react'
-import * as THREE from 'three'
-import * as webgl from '../models/webgl'
+import * as React        from 'react'
+import * as ThreeObjects from '../models/threeObjects'
 
 interface Props {
     id    : string
@@ -9,9 +8,10 @@ interface Props {
 }
 
 export default class WebGL extends React.Component<Props> {
-    private readonly id: string
-    private isWebGL : boolean
-    private renderer: THREE.Renderer
+    private readonly id : string
+    private isWebGL     : boolean
+    private threeObjects: ThreeObjects.IThreeObjects
+    private stateObjects: ThreeObjects.IStateObjects
 
     constructor(props: Props) {
         super(props)
@@ -19,13 +19,14 @@ export default class WebGL extends React.Component<Props> {
     }
 
     componentDidMount() {
-        [ this.isWebGL, this.renderer ] = webgl.createWebGL(document.getElementById(this.id), this.props.width, this.props.height)
+        [ this.isWebGL, this.threeObjects, this.stateObjects ] =
+                ThreeObjects.setupThreeObjects(document.getElementById(this.id), this.props.width, this.props.height)
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.isWebGL)
         {
-            webgl.resize(this.renderer, nextProps.width, nextProps.height)
+            ThreeObjects.resize(this.threeObjects.renderer, nextProps.width, nextProps.height)
         }
     }
 
