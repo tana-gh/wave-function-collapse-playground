@@ -5,6 +5,7 @@ import * as Interaction from './interaction'
 import * as shaders from '../shaders/shaders'
 import detector         from './detector'
 import { store }        from '../store/Provider'
+import { BufferAttribute } from 'three';
 
 export interface IThreeObjects {
     readonly scene    : THREE.Scene
@@ -46,7 +47,7 @@ const createThreeObjects = (width, height) => {
         uniforms: {
             penColor: {
                 type : 'v4',
-                value: new THREE.Vector4(0.0, 0.0, 0.0, 0.0)
+                value: getPenColor()
             }
         }
     }
@@ -68,12 +69,21 @@ const createThreeObjects = (width, height) => {
     renderer.setClearColor(new THREE.Color(0.0, 0.0, 0.0), 0.0)
     renderer.setSize(width, height)
 
-    const geometry = new THREE.PlaneGeometry(width, height)
+    const geometry = new THREE.PlaneBufferGeometry(width, height)
+    const coords   = new Float32Array(
+                        _(geometry.attributes.position.array)
+                            .chunk(3)
+                            .map(vec => [Math.sign(vec[0]), Math.sign(vec[1])])
+                            .flatMap()
+                            .value())
+    geometry.addAttribute('coord', new BufferAttribute(coords, 2))
+
     const material = new THREE.ShaderMaterial({
         vertexShader  : shaders.vertexShader,
         fragmentShader: shaders.fragmentShader,
         uniforms      : stateObjects.uniforms
     })
+
     const mesh     = new THREE.Mesh(geometry, material)
     scene.add(mesh)
 
@@ -90,12 +100,16 @@ const createThreeObjects = (width, height) => {
     })
 
     store.subscribe(() => {
-        const rgba = store.getState().mainCanvasReducer.penColor.rgb
-        stateObjects.uniforms.penColor.value = new THREE.Vector4(rgba.r / 255, rgba.g / 255, rgba.b / 255, rgba.a)
+        stateObjects.uniforms.penColor.value = getPenColor()
         renderer.render(scene, camera)
     })
 
     return <[IThreeObjects, IStateObjects]>[threeObjects, stateObjects]
+}
+
+const getPenColor = () => {
+    const rgba = store.getState().mainCanvasReducer.penColor.rgb
+    return new THREE.Vector4(rgba.r / 255, rgba.g / 255, rgba.b / 255, rgba.a)
 }
 
 const setStyle = (element: HTMLElement, width, height) => {

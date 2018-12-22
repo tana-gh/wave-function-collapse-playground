@@ -18,7 +18,7 @@ const initialState = {
     id      : C.mainCanvasId,
     width   : 400,
     height  : 400,
-    penColor: assignIntToColor(ColorHelper.toState('#000000'))
+    penColor: assignIntToColor(ColorHelper.toState('#FFFFFF'))
 }
 
 export const mainCanvasReducer = (
