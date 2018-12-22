@@ -1,11 +1,13 @@
 import * as THREE from 'three'
+import * as Rx    from 'rxjs'
+import * as RxOp  from 'rxjs/operators'
 import _ = require('lodash')
 
 import * as Interaction from './interaction'
 import * as shaders from '../shaders/shaders'
 import detector         from './detector'
 import { store }        from '../store/Provider'
-import { BufferAttribute } from 'three';
+import { BufferAttribute, Vector2 } from 'three';
 
 export interface IThreeObjects {
     readonly scene    : THREE.Scene
@@ -14,7 +16,11 @@ export interface IThreeObjects {
 }
 
 export interface IStateObjects {
+    width       : number
+    height      : number
     interactions: Interaction.IInteractions
+    mesh        : THREE.Mesh
+    origin      : THREE.Vector2
     uniforms    : any
 }
 
@@ -42,8 +48,12 @@ export const resize = (renderer: THREE.Renderer, width, height) => {
 }
 
 const createThreeObjects = (width, height) => {
-    const stateObjects = {
+    const stateObjects: IStateObjects = {
+        width,
+        height,
         interactions: <Interaction.IInteractions>undefined,
+        mesh        : undefined,
+        origin      : new THREE.Vector2(),
         uniforms: {
             penColor: {
                 type : 'v4',
@@ -54,8 +64,7 @@ const createThreeObjects = (width, height) => {
 
     const scene = new THREE.Scene()
 
-    const camera = new THREE.OrthographicCamera
-    (
+    const camera = new THREE.OrthographicCamera(
         -width  * 0.5,
          width  * 0.5,
          height * 0.5,
@@ -84,27 +93,46 @@ const createThreeObjects = (width, height) => {
         uniforms      : stateObjects.uniforms
     })
 
-    const mesh     = new THREE.Mesh(geometry, material)
+    const mesh = new THREE.Mesh(geometry, material)
+    stateObjects.mesh = mesh
+    setPosition(stateObjects)
     scene.add(mesh)
 
-    const threeObjects = {
+    const threeObjects: IThreeObjects = {
         scene,
         camera,
         renderer
     }
 
+    render(threeObjects, stateObjects)
+
     const intr = Interaction.initInteraction(threeObjects, width, height)
     intr.subscribe(i => {
         stateObjects.interactions = i
-        renderer.render(scene, camera)
     })
+    intr.pipe(RxOp.filter(i => i.button1))
+        .subscribe(i => {
+            if (i.poss.length > 0) {
+                stateObjects.origin = i.poss[0]
+            }
+            render(threeObjects, stateObjects)
+        })
 
     store.subscribe(() => {
         stateObjects.uniforms.penColor.value = getPenColor()
-        renderer.render(scene, camera)
+        render(threeObjects, stateObjects)
     })
 
     return <[IThreeObjects, IStateObjects]>[threeObjects, stateObjects]
+}
+
+const setPosition = (stateObjects: IStateObjects) => {
+    stateObjects.mesh.position.set(stateObjects.origin.x, stateObjects.origin.y, 0.0)
+}
+
+const render = (threeObjects: IThreeObjects, stateObjects: IStateObjects) => {
+    setPosition(stateObjects)
+    threeObjects.renderer.render(threeObjects.scene, threeObjects.camera)
 }
 
 const getPenColor = () => {
