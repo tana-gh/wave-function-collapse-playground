@@ -14,12 +14,14 @@ const Header = () =>
 
 const TitleButton = withRouter(props =>
     <Button style={ titleButtonStyle } onClick={ () => props.history.push('/') }>
-        Wave Function Collapse Playground
+        GPU Oekaki
     </Button>
 )
 
 const titleButtonStyle: React.CSSProperties = {
-    color: '#FFFFFF'
+    color        : '#FFFFFF',
+    fontSize     : '1.5rem',
+    textTransform: 'none'
 }
 
 export default Header

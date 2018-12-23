@@ -11,8 +11,10 @@ class Main extends React.Component<any, any> {
     constructor(props) {
         super(props)
         this.state = {
-            width : props.width,
-            height: props.height
+            width      : props.width,
+            height     : props.height,
+            errorWidth : false,
+            errorHeight: false
         }
     }
 
@@ -24,11 +26,12 @@ class Main extends React.Component<any, any> {
                     handleChangePenColor={ color => this.props.handleChangePenColor(color) }/>
                 <TextField
                     label="Width"  type="number" value={ this.state.width }
-                    onChange={ e => this.setState({ width: parseInt(e.target.value) }) }
+                    onChange={ e => handleChangeText.bind(this)(e, 'width', 'errorWidth') }
                     onBlur={ () => { this.props.handleChangeCanvasSize(this.state.width, this.state.height) } }/>
                 <TextField
                     label="Height" type="number" value={ this.state.height }
-                    onChange={ e => this.setState({ height: parseInt(e.target.value) }) }
+                    error={ this.state.error }
+                    onChange={ e => handleChangeText.bind(this)(e, 'height', 'errorHeight') }
                     onBlur={ () => { this.props.handleChangeCanvasSize(this.state.width, this.state.height) } }/>
                 <WebGL
                     id={ C.mainCanvasId } width={ this.props.width } height={ this.props.height }/>
@@ -49,5 +52,17 @@ const mapDispatchToProps = dispatch => ({
         dispatch(A.canvasSize(C.mainCanvasId, width, height))
     }
 })
+
+function handleChangeText(this: React.Component<any, any>, e: any, stateName: string, errorName: string) {
+    const num = parseInt(e.target.value)
+    if (0 < num && num <= C.maxSize) {
+        this.setState({ [errorName]: false })
+        this.setState({ [stateName]: num })
+    }
+    else {
+        this.setState({ [errorName]: true })
+    }
+    
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main)

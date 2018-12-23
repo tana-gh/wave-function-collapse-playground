@@ -3,10 +3,10 @@ import * as C      from '../const'
 import ColorHelper from 'react-color/lib/helpers/color'
 
 export interface MainCanvasState {
-    id      : string
-    width   : number
-    height  : number
-    penColor: any
+    readonly id      : string
+    readonly width   : number
+    readonly height  : number
+    readonly penColor: any
 }
 
 const assignIntToColor = (color) => ({
@@ -16,8 +16,8 @@ const assignIntToColor = (color) => ({
 
 const initialState = {
     id      : C.mainCanvasId,
-    width   : 400,
-    height  : 400,
+    width   : 1000,
+    height  : 1000,
     penColor: assignIntToColor(ColorHelper.toState('#FFFFFF'))
 }
 

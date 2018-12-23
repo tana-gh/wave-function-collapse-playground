@@ -1,9 +1,9 @@
 
 export interface CanvasSize {
-    type  : 'CANVAS_SIZE'
-    id    : string
-    width : number
-    height: number
+    readonly type  : 'CANVAS_SIZE'
+    readonly id    : string
+    readonly width : number
+    readonly height: number
 }
 
 export const canvasSize = (
@@ -18,9 +18,9 @@ export const canvasSize = (
 }
 
 export interface PenColor {
-    type : 'PEN_COLOR'
-    id   : string
-    color: any
+    readonly type : 'PEN_COLOR'
+    readonly id   : string
+    readonly color: any
 }
 
 export const penColor = (
