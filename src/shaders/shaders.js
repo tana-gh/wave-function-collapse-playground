@@ -1,7 +1,7 @@
-import vertexShader   from './vertexShader.glsl'
-import fragmentShader from './fragmentShader.glsl'
+import penVShader from './penVShader.glsl'
+import penFShader from './penFShader.glsl'
 
 export {
-    vertexShader,
-    fragmentShader
+    penVShader,
+    penFShader
 }

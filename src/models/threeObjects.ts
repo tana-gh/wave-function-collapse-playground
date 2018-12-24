@@ -80,8 +80,8 @@ const createThreeObjects = (width, height) => {
         }
     }
     const material = new THREE.ShaderMaterial({
-        vertexShader  : shaders.vertexShader,
-        fragmentShader: shaders.fragmentShader,
+        vertexShader  : shaders.penVShader,
+        fragmentShader: shaders.penFShader,
         uniforms
     })
 
