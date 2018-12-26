@@ -1,5 +1,5 @@
-import * as React        from 'react'
-import * as ThreeObjects from '../models/threeObjects'
+import * as React      from 'react'
+import MainCanvasModel from '../models/MainCanvasModel'
 
 interface IProps {
     id    : string
@@ -10,8 +10,7 @@ interface IProps {
 export default class WebGL extends React.Component<IProps> {
     private readonly id : string
     private isWebGL     : boolean
-    private threeObjects: ThreeObjects.IThreeObjects | null
-    private stateObjects: ThreeObjects.IStateObjects | null
+    private model       : MainCanvasModel
 
     constructor(props: IProps) {
         super(props)
@@ -19,14 +18,17 @@ export default class WebGL extends React.Component<IProps> {
     }
 
     componentDidMount() {
-        [this.isWebGL, this.threeObjects, this.stateObjects] =
-                ThreeObjects.setupThreeObjects(document.getElementById(this.id)!, this.props.width, this.props.height)
+        this.model = new MainCanvasModel(document.getElementById(this.id)!, this.props.width, this.props.height)
+    }
+
+    componentWillUnmount() {
+        this.model.dispose()
     }
 
     componentWillReceiveProps(nextProps: IProps) {
-        if (this.isWebGL)
+        if (this.model.isValid)
         {
-            ThreeObjects.resize(this.threeObjects!, nextProps.width, nextProps.height)
+            this.model.resizeRenderer(nextProps.width, nextProps.height)
         }
     }
 
