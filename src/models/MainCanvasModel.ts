@@ -1,7 +1,6 @@
 import * as THREE from 'three'
-import * as Rx    from 'rxjs'
 import * as RxOp  from 'rxjs/operators'
-import _ = require('lodash')
+import * as R     from 'ramda'
 
 import Subscriptions    from './Subscriptions'
 import * as Interaction from './interaction'
@@ -77,11 +76,10 @@ export default class MainCanvasModel {
 
         const geometry = new THREE.PlaneBufferGeometry(256, 256)
         const coords   = new Float32Array(
-                            _(geometry.attributes.position.array)
-                                .chunk(3)
-                                .map(vec => [Math.sign(vec[0]), Math.sign(vec[1])])
-                                .flatMap()
-                                .value())
+                            R.pipe(
+                                R.splitEvery(3),
+                                R.map(vec => [Math.sign(vec[0]), Math.sign(vec[1])]),
+                                R.unnest)(Array.from(geometry.attributes.position.array)))
         geometry.addAttribute('coord', new THREE.BufferAttribute(coords, 2))
 
         this.uniforms = {
