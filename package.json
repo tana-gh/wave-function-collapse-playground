@@ -4,7 +4,7 @@
   "author": "tana",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --env.dev",
+    "dev": "webpack-dev-server --env.dev",
     "build": "webpack --env.dev",
     "build:prod": "webpack --env.prod"
   },
