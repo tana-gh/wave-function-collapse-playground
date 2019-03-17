@@ -9,25 +9,25 @@ import detector         from './detector'
 import { store }        from '../store/Provider'
 
 export default class MainCanvasModel {
-    scene   : THREE.Scene
-    camera  : THREE.OrthographicCamera
-    renderer: THREE.WebGLRenderer
+    scene   : THREE.Scene              | undefined
+    camera  : THREE.OrthographicCamera | undefined
+    renderer: THREE.WebGLRenderer      | undefined
 
     isValid      : boolean
-    subscriptions: Subscriptions
+    subscriptions: Subscriptions            | undefined
     interaction  : Interaction.IInteraction | undefined
-    width        : number
-    height       : number
-    mesh         : THREE.Mesh
-    origin       : THREE.Vector2
+    width        : number        | undefined
+    height       : number        | undefined
+    mesh         : THREE.Mesh    | undefined
+    origin       : THREE.Vector2 | undefined
     uniforms     : any
 
     constructor(parent: HTMLElement, width: number, height: number) {
         if (detector.webgl) {
             this.init(width, height)
             
-            parent.appendChild(this.renderer.domElement)
-            this.setStyle(this.renderer.domElement, width, height)
+            parent.appendChild(this.renderer!.domElement)
+            this.setStyle(this.renderer!.domElement, width, height)
             this.setRendererSize()
 
             this.isValid = true
@@ -43,12 +43,12 @@ export default class MainCanvasModel {
     }
 
     resizeRenderer(width: number, height: number) {
-        this.setStyle(this.renderer.domElement, width, height)
+        this.setStyle(this.renderer!.domElement, width, height)
         this.setRendererSize()
     }
 
     dispose() {
-        this.subscriptions.unsubscribeAll()
+        this.subscriptions!.unsubscribeAll()
     }
 
     private init(width: number, height: number) {
@@ -78,7 +78,7 @@ export default class MainCanvasModel {
         const coords   = new Float32Array(
                             R.pipe(
                                 R.splitEvery(3),
-                                R.map(vec => [Math.sign(vec[0]), Math.sign(vec[1])]),
+                                R.map((vec: number[]) => [Math.sign(vec[0]), Math.sign(vec[1])]),
                                 R.unnest)(Array.from(geometry.attributes.position.array)))
         geometry.addAttribute('coord', new THREE.BufferAttribute(coords, 2))
 
@@ -108,8 +108,8 @@ export default class MainCanvasModel {
                 .subscribe(i => {
                     if (i.position) {
                         const position = i.position.clone()
-                        position.x -= this.renderer.domElement.width  * 0.5
-                        position.y -= this.renderer.domElement.height * 0.5
+                        position.x -= this.renderer!.domElement.width  * 0.5
+                        position.y -= this.renderer!.domElement.height * 0.5
                         this.origin = position
                     }
                     this.render()
@@ -122,8 +122,8 @@ export default class MainCanvasModel {
     }
 
     private render() {
-        this.mesh.position.set(this.origin.x, this.origin.y, 0.0)
-        this.renderer.render(this.scene, this.camera)
+        this.mesh!.position.set(this.origin!.x, this.origin!.y, 0.0)
+        this.renderer!.render(this.scene!, this.camera!)
     }
 
     private getPenColor() {
@@ -138,23 +138,23 @@ export default class MainCanvasModel {
     }
 
     private setRendererSize() {
-        const canvas = this.renderer.domElement
+        const canvas = this.renderer!.domElement
         const w = canvas.clientWidth
         const h = canvas.clientHeight
 
         if (w != canvas.width || h != canvas.height) {
-            this.renderer.setSize(w, h)
+            this.renderer!.setSize(w, h)
             this.setCameraSize(w, h)
         }
     }
 
     private setCameraSize(width: number, height: number) {
-        this.camera.left   = -width  * 0.5
-        this.camera.right  =  width  * 0.5
-        this.camera.top    =  height * 0.5
-        this.camera.bottom = -height * 0.5
-        this.camera.near   =  1.0
-        this.camera.far    = -1.0
-        this.camera.updateProjectionMatrix()
+        this.camera!.left   = -width  * 0.5
+        this.camera!.right  =  width  * 0.5
+        this.camera!.top    =  height * 0.5
+        this.camera!.bottom = -height * 0.5
+        this.camera!.near   =  1.0
+        this.camera!.far    = -1.0
+        this.camera!.updateProjectionMatrix()
     }
 }

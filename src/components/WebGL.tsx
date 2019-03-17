@@ -9,8 +9,7 @@ interface IProps {
 
 export default class WebGL extends React.Component<IProps> {
     private readonly id : string
-    private isWebGL     : boolean
-    private model       : MainCanvasModel
+    private model       : MainCanvasModel | undefined
 
     constructor(props: IProps) {
         super(props)
@@ -22,13 +21,13 @@ export default class WebGL extends React.Component<IProps> {
     }
 
     componentWillUnmount() {
-        this.model.dispose()
+        this.model!.dispose()
     }
 
     componentWillReceiveProps(nextProps: IProps) {
-        if (this.model.isValid)
+        if (this.model!.isValid)
         {
-            this.model.resizeRenderer(nextProps.width, nextProps.height)
+            this.model!.resizeRenderer(nextProps.width, nextProps.height)
         }
     }
 
