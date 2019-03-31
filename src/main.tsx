@@ -1,3 +1,4 @@
+import './font'
 import './stylus/style.styl'
 
 import * as React    from 'react'
