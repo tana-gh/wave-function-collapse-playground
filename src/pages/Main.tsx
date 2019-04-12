@@ -1,11 +1,11 @@
 import * as  React from 'react'
 import { connect } from 'react-redux'
 import TextField   from '@material-ui/core/TextField'
-import ColorPicker from '../components/ColorPicker'
-import WebGL       from '../components/WebGL'
+import ColorPicker from '@/components/ColorPicker'
+import WebGL       from '@/components/WebGL'
 
-import * as A from '../reducers/actions'
-import * as C from '../utils/const'
+import * as A from '@/reducers/actions'
+import * as C from '@/utils/const'
 
 class Main extends React.Component<any, any> {
     constructor(props) {

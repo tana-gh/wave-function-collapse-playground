@@ -1,5 +1,5 @@
-import './utils/font'
-import './stylus/style.styl'
+import '@/utils/font'
+import '@/stylus/style.styl'
 
 import * as React    from 'react'
 import * as ReactDOM from 'react-dom'

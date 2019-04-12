@@ -1,5 +1,5 @@
 import * as React      from 'react'
-import MainCanvasModel from '../models/MainCanvasModel'
+import MainCanvasModel from '@/models/MainCanvasModel'
 
 interface IProps {
     id    : string

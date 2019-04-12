@@ -4,9 +4,9 @@ import * as R     from 'ramda'
 
 import Subscriptions    from './Subscriptions'
 import * as Interaction from './interaction'
-import * as shaders     from '../shaders/shaders'
+import * as shaders     from '@/shaders/shaders'
 import detector         from './detector'
-import { store }        from '../store/Provider'
+import { store }        from '@/store/Provider'
 
 export default class MainCanvasModel {
     scene   : THREE.Scene              | undefined

@@ -1,5 +1,5 @@
 import * as A      from './actions'
-import * as C      from '../utils/const'
+import * as C      from '@/utils/const'
 import ColorHelper from 'react-color/lib/helpers/color'
 
 export interface MainCanvasState {
