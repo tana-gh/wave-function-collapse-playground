@@ -84,6 +84,6 @@ typings/
 .dynamodb/
 
 # Dist
-dist/
+dist/development/
 
 # End of https://www.gitignore.io/api/node
