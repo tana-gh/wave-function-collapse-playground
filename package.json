@@ -9,9 +9,9 @@
     "not dead"
   ],
   "scripts": {
+    "test": "echo 'No tests exist.'",
     "dev": "webpack-dev-server --env.dev",
-    "build": "webpack --env.dev",
-    "release": "webpack --env.prod"
+    "build": "webpack --env.prod"
   },
   "dependencies": {
     "@babel/runtime": "^7.3.4",
